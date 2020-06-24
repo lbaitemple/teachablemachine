@@ -38,7 +38,7 @@ class GetHandler(BaseHTTPRequestHandler):
             user, passwd = auth.split(':')
             #auth=base64.b64encode(bauth.encode('utf-8')).decode()
             if not os.path.exists(user):
-                print('making dir')
+#                print('making dir')
                 os.makedirs(user)
 
 
@@ -46,7 +46,7 @@ class GetHandler(BaseHTTPRequestHandler):
                 for fi in form.keys():
                     upfilecontent = form[fi].value
                     filename = os.path.join(user, form[fi].filename)
-                    print(filename)
+#                    print(filename)
 
                     if upfilecontent:
                         fout = open(filename, 'wb')
@@ -79,6 +79,7 @@ class GetHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     from http.server import HTTPServer
     server = HTTPServer(('', 8080), GetHandler)
     print('Starting server, use <Ctrl + F2> to stop')
