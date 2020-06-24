@@ -1,7 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 import cgi, os, json, glob, os
 from pred import classify
-import base64
+import base64, threading, sys
+
 
 ######
 ##   echo username:passwd | base64 >> passwd.txt
@@ -84,3 +85,11 @@ if __name__ == '__main__':
     server = HTTPServer(('', 8080), GetHandler)
     print('Starting server, use <Ctrl + F2> to stop')
     server.serve_forever()
+
+    thread = threading.Thread(target=server.serve_forever)
+    thread.daemon = True
+    try:
+        thread.start()
+    except KeyboardInterrupt:
+        server.shutdown()
+        sys.exit(0)
