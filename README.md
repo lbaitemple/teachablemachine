@@ -2,19 +2,19 @@
 This is a python basic server that you can curl a model file generated from teachable machine to classify an image
 
 On your server
-### install python3 and python3 libraries
+### 1. install python3 and python3 libraries
 ```
 git clone https://github.com/lbaitemple/teachablemachine
 cd teachablemachine
 sudo apt install python3-dev
 sudo bash ./linux_install.sh
 ```
-### to add user
+### 2. add an user
 ```
 echo username:password | base64 >> password.txt
 ```
 
-### run the server
+### 3. run the server
 ```
 python3 pythonserver.py  &> /dev/null &
 ```
